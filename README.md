@@ -17,7 +17,7 @@ A synth loop (by Stereo Surgeon) is played in loop, and pressing the
 button connected to the Pico's GP16 pin triggers a small drum sound
 (by EKVelika).
 
-There are the schematics for the sound amplifier and the Pico
+Here are the schematics for the sound amplifier and the Pico
 connections:
 
 ![Schematics for the sound amplifier](images/amp-schematic.png)
