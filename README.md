@@ -26,7 +26,7 @@ connections:
 
 NOTE: the 75Ω resistor connected to the `SOUND_PIN` was originally
 68Ω, and the 100nF capacitor at the output of the LM386 was originally
-a 100nF. I made the changes because I didn't have the original values
+50nF. I made the changes because I didn't have the original values
 available, but everything seems to work fine.
 
 ### Attributions
