@@ -18,14 +18,16 @@ button connected to the Pico's GP16 pin triggers a small drum sound
 (by EKVelika).
 
 There are the schematics for the sound amplifier and the Pico
-connections (keep in mind I had to replace the 68Ω resistor connected
-to the `SOUND_PIN` with 75Ω, and a 50nF capacitor at the output of the
-LM386 with a 100nF):
+connections:
 
-![Schematics for the sound amplifier](images/amp-schematic.jpg)
+![Schematics for the sound amplifier](images/amp-schematic.png)
 
-![Schematics for the Pico connections](images/pico-schematic.jpg)
+![Schematics for the Pico connections](images/pico-schematic.png)
 
+NOTE: the 75Ω resistor connected to the `SOUND_PIN` was originally
+68Ω, and the 100nF capacitor at the output of the LM386 was originally
+a 100nF. I made the changes because I didn't have the original values
+available, but everything seems to work fine.
 
 ### Attributions
 
