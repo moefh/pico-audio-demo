@@ -50,7 +50,7 @@ void audio_init(int audio_pin, int sample_freq)
   int audio_pin_chan = pwm_gpio_to_channel(audio_pin);
 
   uint f_clk_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
-  float clock_div = ((float)f_clk_sys * 1000.0f) / 245.0f / (float) sample_freq / (float) REPETITION_RATE;
+  float clock_div = ((float)f_clk_sys * 1000.0f) / 254.0f / (float) sample_freq / (float) REPETITION_RATE;
 
   pwm_config config = pwm_get_default_config();
   pwm_config_set_clkdiv(&config, clock_div);
