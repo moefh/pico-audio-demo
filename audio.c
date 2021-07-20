@@ -46,7 +46,7 @@ void audio_init(int audio_pin)
   gpio_set_function(audio_pin, GPIO_FUNC_PWM);
 
   int audio_pin_slice = pwm_gpio_to_slice_num(audio_pin);
-  printf("using audio pin slice %d for pin %d\n", audio_pin_slice, audio_pin);
+  int audio_pin_chan = pwm_gpio_to_channel(audio_pin);
 
   pwm_config config = pwm_get_default_config();
   pwm_config_set_clkdiv(&config, 22.1f / REPETITION_RATE);
@@ -96,10 +96,10 @@ void audio_init(int audio_pin)
   channel_config_set_write_increment(&sample_dma_chan_config, false);          // always write to the same address
   dma_channel_configure(sample_dma_chan,
                         &sample_dma_chan_config,
-                        &single_sample,                  // write to single_sample
-                        &audio_buffers[0][0],            // read from audio buffer
-                        1,                               // only do one transfer (once per PWM DMA completion due to chaining)
-                        false                            // don't start yet
+                        (char*)&single_sample + 2*audio_pin_chan,  // write to single_sample
+                        &audio_buffers[0][0],                      // read from audio buffer
+                        1,                                         // only do one transfer (once per PWM DMA completion due to chaining)
+                        false                                      // don't start yet
                         );
 
 
