@@ -6,6 +6,7 @@
 #include "hardware/irq.h"
 #include "hardware/pwm.h"
 #include "hardware/sync.h"
+#include "hardware/clocks.h"
 
 #include "audio.h"
 
@@ -41,15 +42,18 @@ static void __isr __time_critical_func(dma_handler)()
   dma_hw->ints1 = 1u << trigger_dma_chan;
 }
 
-void audio_init(int audio_pin)
+void audio_init(int audio_pin, int sample_freq)
 {
   gpio_set_function(audio_pin, GPIO_FUNC_PWM);
 
   int audio_pin_slice = pwm_gpio_to_slice_num(audio_pin);
   int audio_pin_chan = pwm_gpio_to_channel(audio_pin);
 
+  uint f_clk_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
+  float clock_div = ((float)f_clk_sys * 1000.0f) / 245.0f / (float) sample_freq / (float) REPETITION_RATE;
+
   pwm_config config = pwm_get_default_config();
-  pwm_config_set_clkdiv(&config, 22.1f / REPETITION_RATE);
+  pwm_config_set_clkdiv(&config, clock_div);
   pwm_config_set_wrap(&config, 254);
   pwm_init(audio_pin_slice, &config, true);
 

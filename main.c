@@ -42,7 +42,7 @@ int main()
   gpio_set_dir(BTN_PIN, false);
   gpio_pull_up(BTN_PIN);
 
-  audio_init(SOUND_PIN);
+  audio_init(SOUND_PIN, 22050);
   int id = audio_play_loop(snd_synth_loop, sizeof(snd_synth_loop), 80);
   printf("playing synth loop as %d\n", id);
 

@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-void audio_init(int audio_pin);
+void audio_init(int audio_pin, int sample_freq);
 uint8_t *audio_get_buffer(void);
 
 int audio_play_once(const uint8_t *samples, int len);
